@@ -1,0 +1,84 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{minted}
+\usepackage{caption}
+\usepackage{geometry}
+\newenvironment{longlisting}{\captionsetup{type=listing,width=\linewidth}}{}
+
+\title{Exercice 1 Projet Prog}
+\author{GUYOT Jérôme}
+
+\begin{document}
+\maketitle
+
+
+
+\section{Code de my\_list.ml}
+
+\begin{longlisting}
+\begin{minted}[breaklines,autogobble,linenos,frame = lines, fontsize=\footnotesize, baselinestretch=.7]{Ocaml}
+
+
+type 'a my_list = |Nil |Cons of 'a * 'a my_list
+
+let rec string_of_list f l =
+  match l with
+    | Nil -> ""
+    | Cons(t,q) ->(f t)^(string_of_list f q)
+
+let hd l =
+  match l with
+    | Nil -> None
+    | Cons(t,q) -> Some t
+
+let tl l =
+  match l with
+    | Nil -> None
+    | Cons(t,q) -> Some q
+
+let rec length l =
+  match l with
+    | Nil -> 0
+    | Cons(t,q) -> 1+(length q)
+
+let rec map f l =
+  match l with
+    | Nil -> Nil
+    | Cons(t,q) -> Cons((f t),(map f q))
+
+\end{minted}
+\end{longlisting}
+
+\section{Examples}
+
+Tête de [a] : a \newline
+Tête de [1, 3, 6, 10, 15, 21, 28, 36, 45, 55] : 1.\newline
+\newline
+Queue de [a] : [].\newline
+Queue de [1, 3, 6, 10, 15, 21, 28, 36, 45, 55] : [3, 6, 10, 15, 21, 28, 36, 45, 55].
+\newline
+\newline
+Taille de [a] : 1.\newline
+Taille de [1, 3, 6, 10, 15, 21, 28, 36, 45, 55] : 10.\newline
+Taille de [] : 0.\newline
+\newline
+Map de (x $\rightarrow$ xx) sur [a] : [aa].\newline
+Map de (x $\rightarrow$ 2x) sur [1, 3, 6, 10, 15, 21, 28, 36, 45, 55] : [2, 6, 12, 20, 30, 42, 56, 72, 90, 110].\newline
+Map de (x $\rightarrow$ 2x) sur [] : [].\newline
+
+
+
+
+\end{document}
