@@ -1,0 +1,2 @@
+let variable = 7.6
+- ( int( variable ) * 8 )
