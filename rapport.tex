@@ -1,0 +1,38 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\title{Projet programmation 1}
+\author{Guyot Jérôme}
+
+\begin{document}
+\maketitle
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\section*{Rapport}
+
+    Difficultés rencontrées :\newline
+    
+    Lors de l'analyse syntaxique à la main : \newline 
+        \tab. La gestion des priorités opératoires \newline
+        \tab. La gestion des cas : $x*int(y)$ et $x*-(y)$ \newline
+        \tab J'ai été obligé de réaliser un parttern matching très exhaustif pour gérer les parenthèse et la priorité opératoire suite à la fermeture d'une parenthèse. Par exemple pour : $a \% (x + y) * z$       \newline
+        \tab Mon analyseur syntaxique construit directement un arbre bien typé et ne vérifie donc pas le typage à la fin. 
+        \newline
+        \newline
+        \tab. La prise en main du module X86\_64 a aussi été compliqué, je me suis retrouvé à utiliser inline à plusieurs reprise pour coder directement en assembleur quand cela me paraissait plus simple. \newline
+        \newline
+        \tab. Gestion des flottants :\newline
+        \tab \tab - Initialiser les flottants a été particulièrement complexe, je me suis donc retrouvé à utiliser un inline pour l'initialisation dans le .data et pour deplacer la valeur dans le registre xmm0
+        Le problème était que sans le inline, j'avais crée une fonction flab convertissant un label en `D operand, sauf que le module mettait automatiquement un \$ devant les operands dans le code assembleur, rendant alors le code faux.\newline
+        \tab \tab - Mettre des flottants dans la pile, actuellement je bouge rsp par des "addq \$8 \%rsp" et "subq \$8 \%rsp". Pour ne pas bouger rsp il faudrait garder en mémoire le nombre de floats et de ints dans la pile ce qui permettrait donc d'acceder toujours au bon endroit, sans avoir a bouger rsp.\newline
+
+
+
+\end{document}
