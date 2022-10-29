@@ -553,7 +553,8 @@ data = inline !data_glob ++ label "S_float" ++ string "%f\n"; }
 	
 	in
 	
-	let nom_fichier = String.sub (Sys.argv.(1)) 0 ((String.length (Sys.argv.(1)) )-4) in
+	let nom = Sys.argv.(1) in
+	let nom_fichier = String.sub nom 0 ((String.length nom )-4) in
 	let c = open_out (nom_fichier^".s") in 
 	let fmt = formatter_of_out_channel c in 
 	let code = if type_int_expression expression then code_int else code_float in
